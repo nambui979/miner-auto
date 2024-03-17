@@ -20,8 +20,7 @@ EOF
 cat /dev/null > /root/killqi.sh
 cat >>/root/killqi.sh <<EOF
 #!/bin/sh
-pid=$(pidof qli-runer)
-sudo /bin/kill $pid
+pkill qli-Client
 EOF
 chmod u+x killqi.sh
 
@@ -32,6 +31,5 @@ screen -q ./qli-Client
 EOF
 chmod +x mineqli.sh
 
-pkill qli-runner
 ./killqi.sh
 ./mineqli.sh
