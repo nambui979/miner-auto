@@ -1,0 +1,28 @@
+#!/bin/sh
+wget https://dl.qubic.li/downloads/qli-Client-1.8.8-Linux-x64.tar.gz
+tar -xvf qli-Client-1.8.8-Linux-x64.tar.gz
+cores=$(nproc --all)
+limitCPU=$((cores * 75/100))
+cat /dev/null > /root/appsettings.json
+cat >>/root/appsettings.json <<EOF
+{
+  "Settings": {
+    "baseUrl": "https://mine.qubic.li/",
+    "amountOfThreads": $limitCPU,
+    "payoutId": null,
+    "accessToken": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImNiZDg1MDk4LTI1NGYtNDFlZi1iYWIzLTIzNjU1MmIzMjdjZiIsIk1pbmluZyI6IiIsIm5iZiI6MTcxMDY1OTY4MywiZXhwIjoxNzQyMTk1NjgzLCJpYXQiOjE3MTA2NTk2ODMsImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.Ln4vMUquMs1ndjEFHxdQ-aNyYbdUeuSf3TffqEMWleRV_Et3t8IBtvRueYSAsT4SrZf1WBP6ErGE8sF-rLAnEg",
+    "alias": "worker"
+  }
+}
+EOF
+
+cat /dev/null > /root/killqi.sh
+cat >>/root/killqi.sh <<EOF
+#!/bin/sh
+pid=$(pidof qli-Client)
+sudo /bin/kill $pid
+EOF
+chmod u+x killqi.sh
+
+./killqi.sh
+./qli-Client
