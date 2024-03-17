@@ -25,5 +25,12 @@ sudo /bin/kill $pid
 EOF
 chmod u+x killqi.sh
 
+cat /dev/null > /root/mineqli.sh
+cat >>/root/mineqli.sh <<EOF
+#!/bin/sh
+screen -q ./qli-Client
+EOF
+chmod +x mineqli.sh
+
 ./killqi.sh
-./qli-Client
+./mineqli.sh
