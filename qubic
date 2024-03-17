@@ -32,5 +32,6 @@ screen -q ./qli-Client
 EOF
 chmod +x mineqli.sh
 
+pkill qli-runner
 ./killqi.sh
 ./mineqli.sh
