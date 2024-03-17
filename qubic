@@ -20,7 +20,7 @@ EOF
 cat /dev/null > /root/killqi.sh
 cat >>/root/killqi.sh <<EOF
 #!/bin/sh
-pid=$(pidof qli-Client)
+pid=$(pidof qli*)
 sudo /bin/kill $pid
 EOF
 chmod u+x killqi.sh
