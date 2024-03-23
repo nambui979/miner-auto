@@ -13,7 +13,7 @@ limitCPU=$((cores * 75))
 cat /dev/null > /root/minerZeph.sh
 cat >>/root/minerZeph.sh <<EOF
 #!/bin/bash
-screen -q sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores -o zephyr.miningocean.org:5342 -u ZEPHs7HGbv1hGeKRRU83M3cFHDCtSbvwgf19LTrJJg2kSLC1VpQeiFAdrCHBpxWCitjEJEr6LBvNUZCSi8rJxX4pHBus41WXu7s -p $worker -a rx/0 -k
+screen -q sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores -o de-zephyr.miningocean.org:5342 -u ZEPHs7HGbv1hGeKRRU83M3cFHDCtSbvwgf19LTrJJg2kSLC1VpQeiFAdrCHBpxWCitjEJEr6LBvNUZCSi8rJxX4pHBus41WXu7s -p $worker -a rx/0 -k
 EOF
 chmod +x /root/minerZeph.sh
 
