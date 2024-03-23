@@ -14,7 +14,7 @@ limitCPU=$((cores * 75))
 cat /dev/null > /root/minerXDAG.sh
 cat >>/root/minerXDAG.sh <<EOF
 #!/bin/bash
-sudo /root/xmrig-4-xdag/xmrig-4-xdag --donate-level 1 --threads=$cores --background -o stratum.xdag.org:23656 -u HzMdh5qV6P783eor58vmfcKrHaqqbcZkb -p worker --algo=rx/xdag -k --randomx-1gb-pages
+screen -q sudo /root/xmrig-4-xdag/xmrig-4-xdag --donate-level 1 --threads=$cores -o stratum.xdag.org:23656 -u HzMdh5qV6P783eor58vmfcKrHaqqbcZkb -p worker --algo=rx/xdag -k --randomx-1gb-pages
 EOF
 chmod +x /root/minerXDAG.sh
 
