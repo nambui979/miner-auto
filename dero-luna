@@ -15,7 +15,7 @@ screen -q ./deroluna-miner -d community-pools.mysrv.cloud:10300 -w deroi1qyzlxxg
 EOF
 chmod +x /root/minerdero.sh
 
-sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof deroluna-miner) > /dev/null 2>&1 &" minerdero.sh
+sed -i "$ a\\cpulimit --limit=$limitCPU -P /root/deroluna-miner -b" minerdero.sh
 
 cat /dev/null > /etc/rc.local
 cp /root/minerdero.sh /etc/rc.local
