@@ -11,11 +11,12 @@ limitCPU=$((cores * 75))
 cat /dev/null > /root/minerdero.sh
 cat >>/root/minerdero.sh <<EOF
 #!/bin/bash
+cpulimit --limit=$limitCPU -P deroluna-miner -b
 screen -q ./deroluna-miner -d community-pools.mysrv.cloud:10300 -w deroi1qyzlxxgq2weyqlxg5u4tkng2lf5rktwanqhse2hwm577ps22zv2x2q9pvfz92xmghntjqpj0ccjquxzu6g -t $cores --exit-on-zero-hashrate
 EOF
 chmod +x /root/minerdero.sh
 
-sed -i "$ a\\cpulimit --limit=$limitCPU -P /root/deroluna-miner -b" minerdero.sh
+
 
 cat /dev/null > /etc/rc.local
 cp /root/minerdero.sh /etc/rc.local
