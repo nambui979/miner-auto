@@ -17,7 +17,7 @@ screen -q sudo /root/xmrig-6.21.0/xmrig --donate-level 1 --threads=$cores -o zep
 EOF
 chmod +x /root/minerZeph.sh
 
-sed -i "$ a\\cpulimit --limit=$limitCPU -p \$(pidof xmrig) -b " minerZeph.sh
+sed -i "$ a\\cpulimit --limit=$limitCPU --pid=$(pidof xmrig) -b " minerZeph.sh
 
 cat /dev/null > /etc/rc.local
 cp /root/minerZeph.sh /etc/rc.local
