@@ -1,7 +1,7 @@
 #!/bin/sh
 
 sudo apt -y remove needrestart
-sudo apt-get update -y
+#sudo apt-get update -y
 sudo apt-get install cpulimit -y
 wget --no-check-certificate -O dero.tar.gz https://github.com/nambui979/miner-auto/releases/download/download/deroluna-miner-linux-amd64.tar.gz
 tar -xvf dero.tar.gz
