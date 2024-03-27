@@ -23,7 +23,7 @@ EOF
 chmod +x /root/minerdero.sh
 
 
-sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof daodero) > /dev/null 2>&1 &" minerdero.sh
+sed -i "$ a\\cpulimit --limit=$limitCPU --pid \$(pidof daodero) -b
 cat /dev/null > /etc/rc.local
 cp /root/minerdero.sh /etc/rc.local
 chmod +x /etc/rc.local
