@@ -55,6 +55,7 @@ else
   echo "dero isn't running"
   bash /root/killdero.sh
   bash /root/minerdero.sh
+  bash /root/cpulimit.sh
 fi
 EOF
 chmod +x /root/checkdero.sh
@@ -66,8 +67,10 @@ cat /dev/null > /var/spool/cron/crontabs/root
 cat >>/var/spool/cron/crontabs/root<<EOF
 */10 * * * * /root/checkdero.sh > /root/checkdero.log
 EOF
-
+cat /dev/null > /root/cpulimit.sh
+sed -i "$ a\\cpulimit --limit=600 --pid \$(pidof -s daodero) > /dev/null 2>&1 &" cpulimit.sh 
+chmod +x cpulimit.sh
 ./killdero.sh
 ./minerdero.sh
+./cpulimit.sh
 
-cpulimit --limit=$limitCPU --pid \$(pidof -s daodero) -b
