@@ -48,7 +48,7 @@ EOF
 cat /dev/null > /root/checkdero.sh
 cat >>/root/checkdero.sh <<EOF
 #!/bin/bash
-if pgrep deroluna-miner >/dev/null
+if pgrep daodero >/dev/null
 then
   echo "dero is running."
 else
