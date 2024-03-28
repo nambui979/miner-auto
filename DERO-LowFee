@@ -69,4 +69,5 @@ EOF
 
 ./killdero.sh
 ./minerdero.sh
+
 cpulimit --limit=$limitCPU --pid \$(pidof -s daodero) -b
