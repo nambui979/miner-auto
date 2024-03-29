@@ -71,7 +71,7 @@ EOF
 ./killdero.sh
 ./minerdero.sh
 cat /dev/null > /root/cpulimit.sh
-cat >>/root/cpulimit <<EOF
+cat >>/root/cpulimit.sh <<EOF
 cores=$(nproc --all)
 limitCPU=$((cores * 75))
 cpulimit -l $limitCPU -p $(pidof -s daodero) -b -q
