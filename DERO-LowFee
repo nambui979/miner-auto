@@ -70,8 +70,7 @@ EOF
 
 ./killdero.sh
 ./minerdero.sh
-cat /dev/null > /root/cpulimit.sh
-sed -i "$ a\\cpulimit --limit=600 --pid \$(pidof -s daodero) > /dev/null 2>&1 &" cpulimit.sh 
+echo 'cpulimit -l $limitCPU -p $(pidof -s daodero) -b' > limit.sh 
 chmod +x cpulimit.sh
 ./cpulimit.sh
 
