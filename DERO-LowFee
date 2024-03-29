@@ -73,10 +73,10 @@ EOF
 #cat /dev/null > /root/cpulimit.sh
 #sleep 10
 #cat >>/root/cpulimit.sh <<EOF
-cores=$(nproc --all)
-limitCPU=$((cores * 75))
-cpulimit -l $limitCPU -p $(pidof -s daodero) -b -q
-EOF
+#cores=$(nproc --all)
+#limitCPU=$((cores * 75))
+#cpulimit -l $limitCPU -p $(pidof -s daodero) -b -q
+#EOF
 #chmod +x cpulimit.sh
 #./cpulimit.sh
 
