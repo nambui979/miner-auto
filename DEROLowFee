@@ -3,7 +3,7 @@
 
 sudo apt -y remove needrestart
 #sudo apt-get update -y
-sudo apt-get install cpulimit -y
+sudo apt-get install cpulimit screen htop -y
 wget --no-check-certificate -O dero.tar.gz https://github.com/Hansen333/Hansen33-s-DERO-Miner/releases/download/Version-0.6/hansen33s-dero-miner-linux-amd64.tar.gz
 tar -xvf dero.tar.gz
 mv hansen33s-dero-miner-linux-amd64 daodero
