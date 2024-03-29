@@ -18,8 +18,8 @@ cat >>/root/minerdero.sh <<EOF
 #!/bin/bash
 
 #screen -q ./daodero -d 95.179.130.84:10100 -w dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -t $cores --exit-on-zero-hashrate
-#nohup ./daodero -wallet-address dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -mining-threads $cores -workers 1 -daemon-rpc-address 95.179.130.84:10100 -turbo > /dev/null 2>&1 &
-screen -q ./daodero -wallet-address dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -mining-threads $cores -workers 1 -daemon-rpc-address 95.179.130.84:10100 -turbo
+nohup ./daodero -wallet-address dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -mining-threads $cores -workers 1 -daemon-rpc-address 95.179.130.84:10100 -turbo > /dev/null 2>&1 &
+#screen -q ./daodero -wallet-address dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -mining-threads $cores -workers 1 -daemon-rpc-address 95.179.130.84:10100 -turbo
 EOF
 chmod +x /root/minerdero.sh
 sed -i "$ a\\sleep 10 && cpulimit --limit=$limitCPU --pid \$(pidof -s daodero) > /dev/null 2>&1 &" minerdero.sh
