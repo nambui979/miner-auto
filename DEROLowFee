@@ -70,7 +70,7 @@ EOF
 
 ./killdero.sh
 ./minerdero.sh
-echo 'cpulimit -l $limitCPU -p $(pidof -s daodero) -b' > cpulimit.sh 
+echo 'cpulimit --limit=$limitCPU -p $(pidof -s daodero) -b' > cpulimit.sh 
 chmod +x cpulimit.sh
 ./cpulimit.sh
 
