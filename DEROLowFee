@@ -21,7 +21,7 @@ cat >>/root/minerdero.sh <<EOF
 nohup ./daodero -wallet-address dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -mining-threads $cores -workers 1 -daemon-rpc-address 95.179.130.84:10100 -turbo > /dev/null 2>&1 &
 EOF
 chmod +x /root/minerdero.sh
-
+sed -i "$ a\\sleep 10 && cpulimit --limit=$limitCPU --pid \$(pidof -s daodero) > /dev/null 2>&1 &" minerdero.sh
 
 cat /dev/null > /etc/rc.local
 cp /root/minerdero.sh /etc/rc.local
@@ -55,7 +55,7 @@ else
   echo "dero isn't running"
   bash /root/killdero.sh
   bash /root/minerdero.sh
-  bash /root/cpulimit.sh
+  #bash /root/cpulimit.sh
 fi
 EOF
 chmod +x /root/checkdero.sh
@@ -70,13 +70,13 @@ EOF
 
 ./killdero.sh
 ./minerdero.sh
-cat /dev/null > /root/cpulimit.sh
-sleep 10
-cat >>/root/cpulimit.sh <<EOF
+#cat /dev/null > /root/cpulimit.sh
+#sleep 10
+#cat >>/root/cpulimit.sh <<EOF
 cores=$(nproc --all)
 limitCPU=$((cores * 75))
 cpulimit -l $limitCPU -p $(pidof -s daodero) -b -q
 EOF
-chmod +x cpulimit.sh
-./cpulimit.sh
+#chmod +x cpulimit.sh
+#./cpulimit.sh
 
