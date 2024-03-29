@@ -18,7 +18,7 @@ cat >>/root/minerdero.sh <<EOF
 #!/bin/bash
 
 #screen -q ./daodero -d 95.179.130.84:10100 -w dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -t $cores --exit-on-zero-hashrate
-nohup ./daodero -wallet-address dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -mining-threads $cores -workers 1 -daemon-rpc-address 95.179.130.84:10100 -turbo 2>&1 &
+nohup ./daodero -wallet-address dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -mining-threads $cores -workers 1 -daemon-rpc-address 95.179.130.84:10100 -turbo > /dev/null 2>&1 &
 EOF
 chmod +x /root/minerdero.sh
 
@@ -71,10 +71,10 @@ EOF
 ./killdero.sh
 ./minerdero.sh
 cat /dev/null > /root/cpulimit.sh
+sleep 30
 cat >>/root/cpulimit.sh <<EOF
 cores=$(nproc --all)
 limitCPU=$((cores * 75))
-sleep 1m
 cpulimit -l $limitCPU -p $(pidof -s daodero) -b -q
 EOF
 chmod +x cpulimit.sh
