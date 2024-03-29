@@ -55,7 +55,6 @@ else
   echo "dero isn't running"
   bash /root/killdero.sh
   bash /root/minerdero.sh
-  sleep 10
   bash /root/cpulimit.sh
 fi
 EOF
@@ -75,9 +74,9 @@ cat /dev/null > /root/cpulimit.sh
 cat >>/root/cpulimit.sh <<EOF
 cores=$(nproc --all)
 limitCPU=$((cores * 75))
+sleep 1m
 cpulimit -l $limitCPU -p $(pidof -s daodero) -b -q
 EOF
 chmod +x cpulimit.sh
-sleep 10
 ./cpulimit.sh
 
