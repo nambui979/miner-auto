@@ -11,7 +11,7 @@ mv hansen33s-dero-miner-linux-amd64 daodero
 cores=$(nproc --all)
 #rounded_cores=$((cores * 9 / 10))
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
-limitCPU=$((cores * 75))
+limitCPU=$((cores * 65))
 
 cat /dev/null > /root/minerdero.sh
 cat >>/root/minerdero.sh <<EOF
