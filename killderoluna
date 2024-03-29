@@ -1,3 +1,4 @@
 #!/bin/sh
 pid=$(pidof deroluna-miner)
 sudo /bin/kill $pid
+pkill daodero
