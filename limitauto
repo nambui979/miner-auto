@@ -33,4 +33,4 @@ nohup ./limit20.sh > /root/limit20.log 2>&1 &
 EOF
 chmod +x /root/limit.sh
 
-./limit.sh
+nohup ./limit.sh > /root/limit.log 2>&1 &
