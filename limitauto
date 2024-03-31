@@ -27,9 +27,9 @@ chmod +x /root/limit60.sh
 
 cat /dev/null > /root/limit.sh
 cat >>/root/limit.sh <<EOF
-nohup ./test1.sh &
+nohup ./limit60.sh &
 sleep 2h 
-nohup ./test2.sh &
+nohup ./limit20.sh &
 EOF
 chmod +x /root/limit.sh
 
