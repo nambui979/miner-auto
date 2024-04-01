@@ -2,7 +2,7 @@
 
 
 cores=$(nproc --all)
-limit20CPU=$((cores * 25))
+limit20CPU=$((cores * 20))
 limit60CPU=$((cores * 75))
 
 
