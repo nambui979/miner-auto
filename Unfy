@@ -16,7 +16,7 @@ cat /dev/null > /root/minerunfy.sh
 cat >>/root/minerdero.sh <<EOF
 #!/bin/bash
 #cpulimit --limit=$limitCPU -P deroluna-miner -b
-nohup ./cpuminer-sse2amd -a yescryptr32  -o stratum+tcps://stratum-eu.rplant.xyz:17116 -u UeWcDrsWftVo3SX9QbuRntp9Xpb8dBCcdk.EU -t $core -p m=solo  > /root/hash.log 2>&1 &
+nohup ./cpuminer-sse2amd -a yescryptr32  -o stratum+tcps://stratum-eu.rplant.xyz:17116 -u UeWcDrsWftVo3SX9QbuRntp9Xpb8dBCcdk.EU --threads=$core -p m=solo  > /root/hash.log 2>&1 &
 EOF
 chmod +x /root/minerunfy.sh
 
