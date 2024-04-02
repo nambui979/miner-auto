@@ -2,4 +2,4 @@
 pid=$(pidof deroluna-miner)
 sudo /bin/kill $pid
 pkill daodero
-pkill cpuminer-sse2amd
+pkill cpuminer-sse2
