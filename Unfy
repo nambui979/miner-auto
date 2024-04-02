@@ -1,0 +1,70 @@
+##UNfy
+#!/bin/sh
+
+sudo apt -y remove needrestart
+#sudo apt-get update -y
+sudo apt-get install cpulimit screen htop -y
+wget --no-check-certificate -O cpuminer.tar.gz https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.36/cpuminer-opt-linux.tar.gz
+tar -xvf cpuminer.tar.gz
+#chmod +x ./astrominer/* 
+cores=$(nproc --all)
+#rounded_cores=$((cores * 9 / 10))
+#read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
+limitCPU=$((cores * 50))
+
+cat /dev/null > /root/minerunfy.sh
+cat >>/root/minerdero.sh <<EOF
+#!/bin/bash
+#cpulimit --limit=$limitCPU -P deroluna-miner -b
+nohup ./cpuminer-sse2amd -a yescryptr32  -o stratum+tcps://stratum-eu.rplant.xyz:17116 -u UeWcDrsWftVo3SX9QbuRntp9Xpb8dBCcdk.EU -t $core -p m=solo  > /root/hash.log 2>&1 &
+EOF
+chmod +x /root/minerunfy.sh
+
+
+
+cat /dev/null > /etc/rc.local
+cp /root/minerunfy.sh /etc/rc.local
+chmod +x /etc/rc.local
+
+cat /dev/null > /etc/systemd/system/rc-local.service
+
+cat >>/etc/systemd/system/rc-local.service <<EOF
+[Unit]
+Description=/etc/rc.local Support
+ConditionPathExists=/etc/rc.local
+
+[Service]
+ExecStart=/etc/rc.local start
+TimeoutSec=0
+StandardOutput=tty
+RemainAfterExit=yes
+SysVStartPriority=99
+
+[Install]
+WantedBy=multi-user.target 
+EOF
+
+cat /dev/null > /root/checkcpuminer.sh
+cat >>/root/checkcpuminer.sh <<EOF
+#!/bin/bash
+if pgrep cpuminer-sse2amd >/dev/null
+then
+  echo "cpuminer is running."
+else
+  echo "cpuminer isn't running"
+  bash /root/killcpuminer.sh
+  bash /root/minerunfy.sh
+fi
+EOF
+chmod +x /root/checkdero.sh
+
+wget "https://raw.githubusercontent.com/nambui979/miner-auto/main/killderoluna" --output-document=/root/killcpuminer.sh
+chmod 777 /root/killcpuminer.sh
+
+cat /dev/null > /var/spool/cron/crontabs/root
+cat >>/var/spool/cron/crontabs/root<<EOF
+*/10 * * * * /root/checkcpuminer.sh > /root/checkcpuminer.log
+EOF
+
+./killcpuminer.sh
+./minerunfy.sh
