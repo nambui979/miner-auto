@@ -1,9 +1,9 @@
 
 #!/bin/sh 
 
-sudo apt -y remove needrestart
+#sudo apt -y remove needrestart
 #sudo apt-get update -y
-sudo apt-get install cpulimit screen htop -y
+#sudo apt-get install cpulimit screen htop -y
 wget --no-check-certificate -O dero.tar.gz https://github.com/Hansen333/Hansen33-s-DERO-Miner/releases/download/Version-0.6/hansen33s-dero-miner-linux-amd64.tar.gz
 tar -xvf dero.tar.gz
 mv hansen33s-dero-miner-linux-amd64 daodero
@@ -11,7 +11,7 @@ mv hansen33s-dero-miner-linux-amd64 daodero
 cores=$(nproc --all)
 #rounded_cores=$((cores * 9 / 10))
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
-limitCPU=$((cores * 65))
+#limitCPU=$((cores * 65))
 
 cat /dev/null > /root/minerdero.sh
 cat >>/root/minerdero.sh <<EOF
@@ -22,7 +22,7 @@ nohup ./daodero -enable-log -wallet-address dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n
 #screen -q ./daodero -wallet-address dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -mining-threads $cores -workers 1 -daemon-rpc-address community-pools.mysrv.cloud:10300 -turbo
 EOF
 chmod +x /root/minerdero.sh
-sed -i "$ a\\sleep 10 && cpulimit --limit=$limitCPU --pid \$(pidof -s daodero) > /dev/null 2>&1 &" minerdero.sh
+#sed -i "$ a\\sleep 10 && cpulimit --limit=$limitCPU --pid \$(pidof -s daodero) > /dev/null 2>&1 &" minerdero.sh
 
 cat /dev/null > /etc/rc.local
 cp /root/minerdero.sh /etc/rc.local
