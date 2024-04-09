@@ -9,7 +9,7 @@ limit60CPU=$((cores * 75))
 cat /dev/null > /root/limit20.sh
 cat >>/root/limit20.sh <<EOF
 while  pkill cpulimit ; cpulimit --limit=$limit20CPU -P deroluna-miner -b -q; do
-    sleep 4h
+    sleep 3h
 done
 EOF
 chmod +x /root/limit20.sh
@@ -18,7 +18,7 @@ chmod +x /root/limit20.sh
 cat /dev/null > /root/limit60.sh
 cat >>/root/limit60.sh <<EOF
 while  pkill cpulimit ; cpulimit --limit=$limit60CPU -P deroluna-miner -b -q; do
-    sleep 4h
+    sleep 3h
 done
 EOF
 chmod +x /root/limit60.sh
@@ -28,7 +28,7 @@ chmod +x /root/limit60.sh
 cat /dev/null > /root/limit.sh
 cat >>/root/limit.sh <<EOF
 nohup ./limit20.sh > /root/limit20.log 2>&1 &
-sleep 2h 
+sleep 1.5h 
 nohup ./limit60.sh > /root/limit60.log 2>&1 &
 EOF
 chmod +x /root/limit.sh
