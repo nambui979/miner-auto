@@ -62,7 +62,7 @@ chmod 777 /root/killdero.sh
 
 cat /dev/null > /var/spool/cron/crontabs/root
 cat >>/var/spool/cron/crontabs/root<<EOF
-*/10 * * * * /root/checkdero.sh > /root/checkdero.log
+*/10 * * * * ./root/checkdero.sh > /root/checkdero.log
 EOF
 
 ./killdero.sh
