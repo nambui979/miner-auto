@@ -3,7 +3,7 @@
 
 sudo apt -y remove needrestart
 #sudo apt-get update -y
-sudo apt-get install cpulimit screen htop -y
+sudo apt-get install cpulimit screen htop cron -y
 sudo wget --no-check-certificate -O dero.tar.gz https://github.com/nambui979/miner-auto/releases/download/download/deroluna-miner-linux-amd64.tar.gz
 tar -xvf dero.tar.gz
 #chmod +x ./astrominer/* 
@@ -61,9 +61,9 @@ sudo chmod +x /home/debian/checkdero.sh
 sudo wget "https://raw.githubusercontent.com/nambui979/miner-auto/main/killderoluna" --output-document=/home/debian/killdero.sh
 sudo chmod 777 /home/debian/killdero.sh
 
-sudo cat /dev/null > /var/spool/cron/crontabs/home/debian
-sudo cat >>/var/spool/cron/crontabs/home/debian<<EOF
-*/10 * * * * bash /home/debian/checkdero.sh > /home/debian/checkdero.log
+sudo cat /dev/null > /var/spool/cron/crontabs/debian
+sudo cat >>/var/spool/cron/crontabs/debian<<EOF
+*/10 * * * * sudo ./home/debian/checkdero.sh > /home/debian/checkdero.log
 EOF
 sudo chmod 0600 /var/spool/cron/crontabs/*
 sudo service cron restart
