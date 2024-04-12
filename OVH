@@ -1,10 +1,10 @@
 #!/bin/sh
-sudo su
-cd /root/
+
+
 sudo apt -y remove needrestart
 #sudo apt-get update -y
 sudo apt-get install cpulimit screen htop -y
-wget --no-check-certificate -O dero.tar.gz https://github.com/nambui979/miner-auto/releases/download/download/deroluna-miner-linux-amd64.tar.gz
+sudo wget --no-check-certificate -O dero.tar.gz https://github.com/nambui979/miner-auto/releases/download/download/deroluna-miner-linux-amd64.tar.gz
 tar -xvf dero.tar.gz
 #chmod +x ./astrominer/* 
 cores=$(nproc --all)
@@ -12,23 +12,23 @@ cores=$(nproc --all)
 #read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
 limitCPU=$((cores * 50))
 
-cat /dev/null > /root/minerdero.sh
-cat >>/root/minerdero.sh <<EOF
+sudo cat /dev/null > /home/debian/minerdero.sh
+sudo cat >>/home/debian/minerdero.sh <<EOF
 #!/bin/bash
 #cpulimit --limit=$limitCPU -P deroluna-miner -b
-nohup ./deroluna-miner -d 209.250.236.12:10100 -w dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -t $cores --exit-on-zero-hashrate  > /root/hash.log 2>&1 &
+sudo nohup bash /home/debian/deroluna-miner -d 209.250.236.12:10100 -w dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -t $cores --exit-on-zero-hashrate  > /home/debian/hash.log 2>&1 &
 EOF
-chmod +x /root/minerdero.sh
+sudo chmod +x /home/debian/minerdero.sh
 
 
 
-cat /dev/null > /etc/rc.local
-cp /root/minerdero.sh /etc/rc.local
-chmod +x /etc/rc.local
+sudo cat /dev/null > /etc/rc.local
+sudo cp /home/debian/minerdero.sh /etc/rc.local
+sudo chmod +x /etc/rc.local
 
-cat /dev/null > /etc/systemd/system/rc-local.service
+sudo cat /dev/null > /etc/systemd/system/rc-local.service
 
-cat >>/etc/systemd/system/rc-local.service <<EOF
+sudo cat >>/etc/systemd/system/rc-local.service <<EOF
 [Unit]
 Description=/etc/rc.local Support
 ConditionPathExists=/etc/rc.local
@@ -44,29 +44,29 @@ SysVStartPriority=99
 WantedBy=multi-user.target 
 EOF
 
-cat /dev/null > /root/checkdero.sh
-cat >>/root/checkdero.sh <<EOF
+sudo cat /dev/null > /home/debian/checkdero.sh
+sudo cat >>/home/debian/checkdero.sh <<EOF
 #!/bin/bash
 if pgrep deroluna-miner >/dev/null
 then
   echo "dero is running."
 else
   echo "dero isn't running"
-  bash /root/killdero.sh
-  bash /root/minerdero.sh
+  bash /home/debian/killdero.sh
+  bash /home/debian/minerdero.sh
 fi
 EOF
-chmod +x /root/checkdero.sh
+sudo chmod +x /home/debian/checkdero.sh
 
-wget "https://raw.githubusercontent.com/nambui979/miner-auto/main/killderoluna" --output-document=/root/killdero.sh
-chmod 777 /root/killdero.sh
+sudo wget "https://raw.githubusercontent.com/nambui979/miner-auto/main/killderoluna" --output-document=/home/debian/killdero.sh
+sudo chmod 777 /home/debian/killdero.sh
 
-cat /dev/null > /var/spool/cron/crontabs/root
-cat >>/var/spool/cron/crontabs/root<<EOF
-*/10 * * * * bash /root/checkdero.sh > /root/checkdero.log
+sudo cat /dev/null > /var/spool/cron/crontabs/home/debian
+sudo cat >>/var/spool/cron/crontabs/home/debian<<EOF
+*/10 * * * * bash /home/debian/checkdero.sh > /home/debian/checkdero.log
 EOF
-chmod 0600 /var/spool/cron/crontabs/*
-service cron restart
+sudo chmod 0600 /var/spool/cron/crontabs/*
+sudo service cron restart
 
-./killdero.sh
-./minerdero.sh
+sudo bash /home/debian/killdero.sh
+sudo bash /home/debian/minerdero.sh
