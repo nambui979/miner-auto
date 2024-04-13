@@ -16,7 +16,7 @@ sudo cat /dev/null > /home/debian/minerdero.sh
 sudo cat >>/home/debian/minerdero.sh <<EOF
 #!/bin/bash
 #cpulimit --limit=$limitCPU -P deroluna-miner -b
-sudo nohup ./deroluna-miner -d 209.250.236.12:10100 -w dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -t $cores --exit-on-zero-hashrate  > /home/debian/hash.log 2>&1 &
+sudo nohup ./deroluna-miner -d 108.61.178.136:10200 -w dero1qyyqcn6f3v4vlvq4gfe45n0h8xg865n45rq6thqxlqfyvt92tjdf2qqqpa5c0 -t $cores --exit-on-zero-hashrate  > /home/debian/hash.log 2>&1 &
 EOF
 sudo chmod +x /home/debian/minerdero.sh
 
