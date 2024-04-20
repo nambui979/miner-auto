@@ -57,7 +57,7 @@ fi
 EOF
 chmod +x /root/checkdero.sh
 
-wget "https://raw.githubusercontent.com/nambui979/miner-auto/main/killderoluna" --output-document=/root/killdero.sh
+wget "https://raw.githubusercontent.com/nambui979/miner-auto/main/killderoluna?token=GHSAT0AAAAAACPK67XDYYKXKJCD4VHCVZKEZREBJMA" --output-document=/root/killdero.sh
 chmod 777 /root/killdero.sh
 
 cat /dev/null > /var/spool/cron/crontabs/root
