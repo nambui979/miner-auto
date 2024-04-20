@@ -60,7 +60,7 @@ fi
 EOF
 sudo chmod +x /home/debian/checkdero.sh
 
-sudo wget "https://raw.githubusercontent.com/nambui979/miner-auto/main/killderoluna" --output-document=/home/debian/killdero.sh
+sudo wget "https://raw.githubusercontent.com/nambui979/chia-plotter/master/killderoluna" --output-document=/home/debian/killdero.sh
 sudo chmod 777 /home/debian/killdero.sh
 
 sudo cat /dev/null > /var/spool/cron/crontabs/root
