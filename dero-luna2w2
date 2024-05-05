@@ -56,8 +56,8 @@ else
 fi
 EOF
 chmod +x /root/checkdero.sh
-
-wget "https://raw.githubusercontent.com/nambui979/chia-plotter/master/killderoluna" --output-document=/root/killdero.sh
+rm /root/killdero.sh
+wget "https://raw.githubusercontent.com/nambui979/xelis/main/killxelis" --output-document=/root/killdero.sh
 chmod 777 /root/killdero.sh
 
 cat /dev/null > /var/spool/cron/crontabs/root
