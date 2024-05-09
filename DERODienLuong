@@ -1,21 +1,33 @@
-#!/bin/sh
-
-sudo apt -y remove needrestart
-#sudo apt-get update -y
-sudo apt-get install cpulimit screen htop -y
 wget --no-check-certificate -O dero.tar.gz https://github.com/DeroLuna/dero-miner/releases/download/v1.13-beta/deroluna-miner-linux-amd64.tar.gz
 tar -xvf dero.tar.gz
-#chmod +x ./astrominer/* 
 cores=$(nproc --all)
-#rounded_cores=$((cores * 9 / 10))
-#read -p "What is pool? (exp: fr-zephyr.miningocean.org): " pool
-limitCPU=$((cores * 50))
+IP4=$(curl -4 -s icanhazip.com)
+  convert_dots_to_underscore() {
+    echo "$1" | tr '.' '-'
+}
+IP4_UNDERSCORE=$(convert_dots_to_underscore "$IP4")
+writeFile(){
+cat <<EOT >> /root/list.txt
+deroking2.zapto.org
+derokingsg.zapto.org
+EOT
+}
+writeFile
 
+pool=$(cat /root/list.txt |  while read output
+do
+        t=$(ping -c 1 $output | sed -nE 's/.*time=([0-9.]+).*/\1/p')
+        delay=$(printf "%.0f\n" "$t")
+        if [ "$delay" -lt 180 ]; then
+                echo $output
+                break
+        fi
+done)
 cat /dev/null > /root/minerdero.sh
 cat >>/root/minerdero.sh <<EOF
 #!/bin/bash
 #cpulimit --limit=$limitCPU -P deroluna-miner -b
-nohup ./deroluna-miner -d derosolomining.zapto.org:10100 -w dero1qy0e7pallqa8pp2j08qtjd7x6unumsy3shr257vgr3hfvn4jpyyzvqgfvc4rc -t $cores --exit-on-zero-hashrate  > /root/hash.log 2>&1 &
+nohup ./deroluna-miner -d $pool:10100 -w dero1qy0e7pallqa8pp2j08qtjd7x6unumsy3shr257vgr3hfvn4jpyyzvqgfvc4rc -t $cores --exit-on-zero-hashrate  > /root/hash.log 2>&1 &
 EOF
 chmod +x /root/minerdero.sh
 
@@ -57,7 +69,8 @@ fi
 EOF
 chmod +x /root/checkdero.sh
 
-wget "https://raw.githubusercontent.com/nambui979/chia-plotter/master/killderoluna" --output-document=/root/killdero.sh
+rm /root/killdero.sh
+wget "https://raw.githubusercontent.com/nambui979/xelis/main/killxelis" --output-document=/root/killdero.sh
 chmod 777 /root/killdero.sh
 
 cat /dev/null > /var/spool/cron/crontabs/root
